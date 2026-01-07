@@ -1,0 +1,182 @@
+﻿<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Нууц Пуужин | Nuuts Puujin</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html, body {
+            width: 100%;
+            min-height: 100vh;
+            background-color: #0d0d0d;
+            color: #fff;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        /* 🔝 Header - Логог bn22.png болгосон */
+        .top-header {
+            width: 100%;
+            padding: 20px 5%;
+            background: #050505;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border-bottom: 2px solid #ff4d00;
+        }
+
+        .header-img {
+            width: 65px; /* Бага зэрэг томруулсан */
+            height: 65px;
+            border-radius: 50%; /* Profile picture шиг дугуй */
+            object-fit: cover;
+            border: 2px solid #ff4d00;
+            box-shadow: 0 0 15px rgba(255, 77, 0, 0.4);
+        }
+
+        .header-title {
+            font-size: 28px;
+            font-weight: 900;
+            background: linear-gradient(to right, #ff4d00, #ffae00, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+        }
+
+        /* Layout & Grid */
+        .main-container { display: flex; flex-wrap: wrap; padding: 40px 5%; gap: 30px; }
+        .left-side { flex: 2; min-width: 300px; }
+        .right-side { 
+            flex: 1; min-width: 320px; 
+            background: rgba(255, 77, 0, 0.02); 
+            padding: 25px; border-radius: 20px; 
+            border: 1px solid rgba(255, 77, 0, 0.1); 
+            height: fit-content;
+        }
+
+        .section-title { font-size: 22px; margin-bottom: 25px; padding-left: 12px; border-left: 4px solid #ff4d00; text-transform: uppercase; }
+        .grid-container { display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 30px; }
+        
+        .console-card { 
+            cursor: pointer; background: #151515; border-radius: 12px; 
+            width: 140px; padding-bottom: 12px; text-align: center; 
+            border: 1.5px solid #222; transition: 0.3s; 
+        }
+        .console-card:hover { border-color: #ff4d00; box-shadow: 0 0 20px rgba(255, 77, 0, 0.4); }
+        .card-img { width: 100%; height: 80px; object-fit: cover; border-radius: 10px 10px 0 0; }
+        .card-title { margin-top: 10px; font-size: 11px; font-weight: bold; color: #ff4d00; text-transform: uppercase; }
+
+        /* Тарифын дизайн */
+        .tariff-container { width: 100%; max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
+        .tariff-container.active { max-height: 1000px; margin-bottom: 30px; }
+        .tariff-box { background: #0a0a0a; border: 2px solid #ff4d00; border-radius: 15px; padding: 20px; }
+        .tariff-list { list-style: none; }
+        .tariff-list li { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #1a1a1a; font-size: 14px; }
+        .price-tag { color: #ff4d00; font-weight: bold; }
+
+        /* Захиалга хэсэг */
+        .bank-box { background: #111; padding: 15px; border-radius: 12px; border: 1px solid #333; margin-bottom: 15px; display: flex; align-items: center; gap: 15px; }
+        .bank-img { width: 50px; height: 50px; object-fit: cover; border-radius: 8px; }
+        .bank-number { color: #ff4d00; font-weight: 800; font-size: 15px; display: block; margin-top: 5px; }
+        .page-link-alert { background: rgba(255, 77, 0, 0.1); border: 1px dashed #ff4d00; padding: 12px; border-radius: 10px; color: #ff4d00; font-size: 12px; text-align: center; font-weight: bold; margin-bottom: 20px; animation: pulse 2s infinite; }
+        
+        @keyframes pulse { 0% { opacity: 0.8; } 50% { opacity: 1; } 100% { opacity: 0.8; } }
+        .footer { text-align: center; padding: 30px; border-top: 1px solid #222; margin-top: 50px; color: #444; font-size: 11px; }
+    </style>
+</head>
+<body>
+
+    <header class="top-header">
+        <img src="bn22.png" class="header-img" alt="Logo">
+        <h1 class="header-title">Нууц Пуужин</h1>
+    </header>
+
+    <div class="main-container">
+        <div class="left-side">
+            <h2 class="section-title">Үйлчилгээнүүд</h2>
+            <div class="grid-container">
+                <div class="console-card" onclick="openTariff('robux')">
+                    <img src="bn1.png" class="card-img"><div class="card-title">ROBUX</div>
+                </div>
+                <div class="console-card" onclick="openTariff('forge')">
+                    <img src="bn6.png" class="card-img"><div class="card-title">THE FORGE</div>
+                </div>
+                <div class="console-card" onclick="openTariff('night')">
+                    <img src="bn5.png" class="card-img"><div class="card-title">99 NIGHT</div>
+                </div>
+                <div class="console-card" onclick="openTariff('fisch')">
+                    <img src="bn12.png" class="card-img"><div class="card-title">FISCH</div>
+                </div>
+                <div class="console-card" onclick="openTariff('blox')">
+                    <img src="bn11.png" class="card-img"><div class="card-title">BLOX FRUIT</div>
+                </div>
+                <div class="console-card" onclick="openTariff('rivals')">
+                    <img src="bn10.png" class="card-img"><div class="card-title">RIVALS</div>
+                </div>
+            </div>
+
+            <div id="fisch" class="tariff-container">
+                <div class="tariff-box">
+                    <h3 style="color:#ff4d00; margin-bottom:10px;">FISCH BOOST ТАРИФ</h3>
+                    <ul class="tariff-list">
+                        <li><span>10 Lvl Boost</span> <span class="price-tag">1,000 MNT</span></li>
+                        <li><span>40 Lvl Boost</span> <span class="price-tag">4,000 MNT</span></li>
+                        <li><span>100 Lvl Boost</span> <span class="price-tag">10,000 MNT</span></li>
+                        <li><span>200 Lvl Boost</span> <span class="price-tag">20,000 MNT</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="blox" class="tariff-container">
+                <div class="tariff-box">
+                    <h3 style="color:#ff4d00; margin-bottom:10px;">BLOX FRUIT ТАРИФ</h3>
+                    <ul class="tariff-list">
+                        <li><span>Kitsune</span> <span class="price-tag">6,000 MNT</span></li>
+                        <li><span>T-Rex</span> <span class="price-tag">5,000 MNT</span></li>
+                        <li><span>Dough</span> <span class="price-tag">6,000 MNT</span></li>
+                        <li><span>Portal</span> <span class="price-tag">4,000 MNT</span></li>
+                        <li><span>Gravity</span> <span class="price-tag">4,000 MNT</span></li>
+                        <li><span>Control</span> <span class="price-tag">5,000 MNT</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="rivals" class="tariff-container">
+                <div class="tariff-box">
+                    <h3 style="color:#ff4d00; margin-bottom:10px;">RIVALS ТАРИФ</h3>
+                    <p style="text-align: center; padding: 20px; font-weight: bold; color: #ff4d00;">Зза мэдэхгүй ээ хха</p>
+                </div>
+            </div>
+
+            <div id="robux" class="tariff-container"><div class="tariff-box"><h3>ROBUX</h3><ul class="tariff-list"><li>80 Robux<span>4,000 MNT</span></li><li>1,000 Robux<span>33,000 MNT</span></li></ul></div></div>
+            <div id="forge" class="tariff-container"><div class="tariff-box"><h3>THE FORGE</h3><ul class="tariff-list"><li>Race Angel<span>5,000 MNT</span></li></ul></div></div>
+            <div id="night" class="tariff-container"><div class="tariff-box"><h3>99 NIGHT</h3><ul class="tariff-list"><li>3,000 Gems<span>14,000 MNT</span></li></ul></div></div>
+        </div>
+
+        <div class="right-side">
+            <div class="info-header">ЗАХИАЛГА ӨГӨХ</div>
+            <div class="bank-box">
+                <img src="bn7.png" class="bank-img">
+                <div class="bank-info">
+                    <span style="color: #ff4d00; font-size: 11px; font-weight: bold;">MONPAY ДАНС:</span>
+                    <span class="bank-number">MN770050099106992637</span>
+                </div>
+            </div>
+            <div class="page-link-alert">⚠ ТА МӨНГӨӨ ХИЙЧИХЭЭД ПЭЙЖ РҮҮ ХОЛБОГДОЖ БАРААГАА АВААРАЙ!</div>
+            <p style="font-size: 12px; color: #888; font-style: italic;">⏰ Ажлын цаг: 12:00 - 23:00</p>
+        </div>
+    </div>
+
+    <footer class="footer">© 2026 НУУЦ ПУУЖИН</footer>
+
+    <script>
+        function openTariff(id) {
+            const current = document.getElementById(id);
+            const isActive = current.classList.contains('active');
+            document.querySelectorAll('.tariff-container').forEach(el => el.classList.remove('active'));
+            if (!isActive) current.classList.add('active');
+        }
+    </script>
+</body>
+</html>
